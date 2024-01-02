@@ -1,0 +1,56 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-image: url("images/under-the-sea.jpg");
+  }
+
+  h1 {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    color: rgb(110, 5, 110)
+  }
+
+  .hearts {
+    text-align: right;
+    float: right;
+    margin-right: 20px;
+    border-style: ridge;
+    border-radius: 5px;
+    border-color: purple;
+    background-color: rgba(128, 0, 128, 0.2);
+    width: 11%;
+    padding: 5px
+  }
+  
+  .memory-game {
+    width: 640px;
+    height: 640px;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .memory-card {
+    width: calc(25% - 10px);
+    height: calc(33.333% - 10px);
+    margin: 5px;
+    position: relative;
+    box-shadow: 
+    5px 5px 5px rgba(200,0,0,0.5),
+    3px 3px 3px rgba(0,0,255,1);
+  }
+ 
+.front-face,
+.back-face {
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  position: absolute;
+  border-radius: 5px;
+}
