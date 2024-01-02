@@ -53,4 +53,10 @@
   padding: 4px;
   position: absolute;
   border-radius: 5px;
+  transform: scale(1);
 }
+
+.memory-card:active {
+    transform: scale(0.9);
+    transition: transform 0.2s;
+  }
