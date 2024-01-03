@@ -5,6 +5,7 @@
   }
 
   body {
+    background-size:cover;
     background-image: url("images/under-the-sea.jpg");
   }
 
@@ -23,27 +24,30 @@
     border-radius: 5px;
     border-color: purple;
     background-color: rgba(128, 0, 128, 0.2);
-    width: 11%;
-    padding: 5px
+    width: 60;
+    padding: 3px
   }
   
   .memory-game {
-    width: 640px;
-    height: 640px;
+    width: 70%;
+    height: 600px;
     margin: auto;
     margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
+    perspective: 1000px;
   }
 
   .memory-card {
-    width: calc(25% - 10px);
-    height: calc(33.333% - 10px);
+    width: calc(16% - 10px);
+    height: calc(20% - 10px);
     margin: 5px;
     position: relative;
     box-shadow: 
     5px 5px 5px rgba(200,0,0,0.5),
     3px 3px 3px rgba(0,0,255,1);
+    transform-style: preserve-3d;
+    transition: transform .5s;
   }
  
 .front-face,
@@ -54,9 +58,14 @@
   position: absolute;
   border-radius: 5px;
   transform: scale(1);
+  backface-visibility: hidden;
 }
 
 .memory-card:active {
     transform: scale(0.9);
     transition: transform 0.2s;
+  }
+
+  .memory-card.flip {
+    transform: rotateY(180deg);
   }
