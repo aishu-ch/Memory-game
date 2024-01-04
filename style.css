@@ -10,6 +10,7 @@
   }
 
   h1 {
+    font-family: 'Bungee Spice', sans-serif;
     text-align: center;
     margin-top: 10px;
     font-weight: bold;
@@ -29,8 +30,8 @@
   }
   
   .memory-game {
-    width: 70%;
-    height: 600px;
+    width: 640px;
+    height: 640px;
     margin: auto;
     margin-top: 50px;
     display: flex;

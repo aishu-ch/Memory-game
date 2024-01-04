@@ -44,7 +44,7 @@ function flipCard() {
     secondCard.classList.remove("flip");
     
     resetBoard()
-    
+
  }, 1500);
  }
 
@@ -54,5 +54,14 @@ function flipCard() {
     firstCard = null
     secondCard = null
  }
+
+ (function shuffle() {
+    cards.forEach(card => {
+        let randomNumber = Math.floor(Math.random()*24);
+        card.style.order = randomNumber;
+    })
+ })()
+
+ 
 
 cards.forEach(card => card.addEventListener("click", flipCard))
