@@ -27,7 +27,7 @@
     margin-top: 20px;
   }
 
-  .start-game, .life-container, .play-again {
+  .start-game, .life-container {
     justify-content: center;
     align-items: center;
     display: flex;
@@ -72,6 +72,12 @@
     transition: transform 0.2s;
   }
 
-  .memory-card.flip {
+/* .memory-card.all-flip {
+    transform: scale(0.9);
+    transition: transform 0.2s;
+    transform: rotateY(180deg);
+} */
+
+.memory-card.flip {
     transform: rotateY(180deg);
   }

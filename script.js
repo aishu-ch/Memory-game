@@ -7,6 +7,17 @@ const startGame = document.querySelector(".start-game")
 const cards = document.querySelectorAll(".memory-card")
 const lifeParent = document.getElementsByClassName("hearts")
 
+function flipWhenStart() {
+    cards.forEach(card => card.classList.add("flip"))
+    
+    startGame.innerHTML = "<h4><strong>You have 10 seconds to memorize the cards.</strong></h4>"
+
+    setTimeout(() => {
+        startGame.innerHTML = "<h4><strong>Here you go!</strong></h4>"
+        cards.forEach(card => card.classList.remove("flip"))
+    }, 10000);
+}
+
 
 function flipCard() {
     if (lockBoard) return
@@ -34,7 +45,7 @@ function flipCard() {
     } 
     
     unFlipCards();
-    loseALife();
+    // loseALife();
 }
 
  function disableCards() {
@@ -69,7 +80,7 @@ function flipCard() {
 //     if(lifeParent.hasChildNodes()) {
 //         lifeParent.removeChild(lifeParent.children[0])
 //     }
- }
+//  }
 
  (function shuffle() {
     cards.forEach(card => {
@@ -84,9 +95,9 @@ function flipCard() {
 
 
 startGame.addEventListener("click", function() {
-    alert("Game starts!")
+    startGame.innerHTML = "<h4><strong>Game started!</strong></h4>";
     gameStarted = true
-
+    flipWhenStart();
 if(gameStarted) {
     cards.forEach(card => card.addEventListener("click", flipCard))
     }
