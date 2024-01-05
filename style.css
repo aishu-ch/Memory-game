@@ -21,7 +21,7 @@
     border-radius: 5px;
     border-color: rgb(255, 208, 0);
     background-color: rgb(255, 208, 0, 1);
-    width: 100px;
+    width: 158px;
     padding: 3px;
     margin-bottom: -20px;
     margin-top: 20px;
@@ -71,12 +71,6 @@
     transform: scale(0.9);
     transition: transform 0.2s;
   }
-
-/* .memory-card.all-flip {
-    transform: scale(0.9);
-    transition: transform 0.2s;
-    transform: rotateY(180deg);
-} */
 
 .memory-card.flip {
     transform: rotateY(180deg);

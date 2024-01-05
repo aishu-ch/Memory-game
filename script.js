@@ -10,12 +10,12 @@ const lifeParent = document.getElementsByClassName("hearts")
 function flipWhenStart() {
     cards.forEach(card => card.classList.add("flip"))
     
-    startGame.innerHTML = "<h4><strong>You have 10 seconds to memorize the cards.</strong></h4>"
+    startGame.innerHTML = "<h4><strong>You have 15 seconds to memorize the cards.</strong></h4>"
 
     setTimeout(() => {
         startGame.innerHTML = "<h4><strong>Here you go!</strong></h4>"
         cards.forEach(card => card.classList.remove("flip"))
-    }, 10000);
+    }, 15000);
 }
 
 
@@ -62,7 +62,7 @@ function flipCard() {
     firstCard.classList.remove("flip");
     secondCard.classList.remove("flip");
     
-    alert("Lost a life!")
+    alert('Lost a life! Memorize the cards. It\'ll flip as you click "OK."')
 
     resetBoard()
 
