@@ -1,7 +1,12 @@
-const cards = document.querySelectorAll(".memory-card")
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
+let gameStarted = false
+
+const startGame = document.querySelector(".start-game")
+const cards = document.querySelectorAll(".memory-card")
+const lifeParent = document.getElementsByClassName("hearts")
+
 
 function flipCard() {
     if (lockBoard) return
@@ -12,6 +17,7 @@ function flipCard() {
     if (!hasFlippedCard) {
         hasFlippedCard = true;
         firstCard = this;
+        // console.log(this)
         return
     }
 
@@ -25,17 +31,19 @@ function flipCard() {
     if (firstCard.dataset.framework === secondCard.dataset.framework) {
         disableCards();
         return;
-    }
-
+    } 
+    
     unFlipCards();
- }
+    loseALife();
+}
 
  function disableCards() {
     firstCard.removeEventListener("click", flipCard);
     secondCard.removeEventListener("click", flipCard)
-
+   
     resetBoard();
  }
+
 
  function unFlipCards() {
     lockBoard = true;
@@ -43,6 +51,8 @@ function flipCard() {
     firstCard.classList.remove("flip");
     secondCard.classList.remove("flip");
     
+    alert("Lost a life!")
+
     resetBoard()
 
  }, 1500);
@@ -55,6 +65,12 @@ function flipCard() {
     secondCard = null
  }
 
+//  function loseALife() {
+//     if(lifeParent.hasChildNodes()) {
+//         lifeParent.removeChild(lifeParent.children[0])
+//     }
+ }
+
  (function shuffle() {
     cards.forEach(card => {
         let randomNumber = Math.floor(Math.random()*24);
@@ -62,6 +78,17 @@ function flipCard() {
     })
  })()
 
- 
+ function disableStart() {
+    startGame.removeEventListener("click", disableStart)
+ }
 
-cards.forEach(card => card.addEventListener("click", flipCard))
+
+startGame.addEventListener("click", function() {
+    alert("Game starts!")
+    gameStarted = true
+
+if(gameStarted) {
+    cards.forEach(card => card.addEventListener("click", flipCard))
+    }
+})
+ 
