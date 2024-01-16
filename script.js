@@ -3,14 +3,14 @@ let lockBoard = false;
 let firstCard, secondCard;
 let gameStarted = false;
 
+const startButton = document.querySelector(".button")
 const gameStatus = document.querySelector(".start-game");
 const cards = document.querySelectorAll(".card");
-// console.log(cards)
 const lives = document.querySelector(".hearts");
-// console.log(lives.childNodes)
+
 
 function flipWhenStart() {
-  //working
+  gameStarted = true
   cards.forEach((card) => card.classList.add("flip"));
 
   gameStatus.innerHTML =
@@ -20,6 +20,11 @@ function flipWhenStart() {
     gameStatus.innerHTML = "<h4><strong>Here you go!</strong></h4>";
     cards.forEach((card) => card.classList.remove("flip"));
   }, 1000); //change to 15secs
+
+  if (gameStarted) {
+    cards.forEach((card) => card.addEventListener("click", flipCard));
+  };
+  
 }
 
 function flipCard() {
@@ -31,7 +36,6 @@ function flipCard() {
   if (!hasFlippedCard) {
     hasFlippedCard = true;
     firstCard = this;
-    // console.log(this)
     return;
   }
 
@@ -64,15 +68,14 @@ function unFlipCards() {
 
     gameStatus.innerHTML = "<h4><strong>Lost a life!</strong></h4>";
 
-    if (lives.hasChildNodes) {
-      loseALife();
-    } else {
-      gameStatus.innerHTML = "<h4><strong>You Lose!</strong></h4>";
-    }
-
+    loseALife(); 
+    
+    if(lives.hasChildNodes){
     setTimeout(() => {
       gameStatus.innerHTML = "<h4><strong>Proceed...</strong></h4>";
-    }, 1500);
+    }, 1500);} else {
+        gameStatus.innerHTML = "<h4><strong>You lose</strong></h4>"
+    }
 
     resetBoard();
   }, 1500);
@@ -87,22 +90,23 @@ function resetBoard() {
 
 (function shuffle() {
   cards.forEach((card) => {
-    let randomNumber = Math.floor(Math.random() * 24);
+    let randomNumber = Math.floor(Math.random() * 20);
     card.style.order = randomNumber;
   });
 })();
 
+
+function disableStart() {
+    startButton.removeEventListener("click", startButton)
+ }
+
+
 function loseALife() {
   let child = document.querySelector(".life");
-  // console.log(child)
   let lostLife = lives.removeChild(child);
-  // console.log(lostLife)
 }
 
-gameStatus.addEventListener("click", function () {
-  gameStarted = true;
-  flipWhenStart();
-  if (gameStarted) {
-    cards.forEach((card) => card.addEventListener("click", flipCard));
-  }
-});
+startButton.addEventListener("click", flipWhenStart);
+disableStart()
+  
+  
