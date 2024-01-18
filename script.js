@@ -3,28 +3,26 @@ let lockBoard = false;
 let firstCard, secondCard;
 let gameStarted = false;
 
-const startButton = document.querySelector(".button")
+const startButton = document.querySelector(".button");
 const gameStatus = document.querySelector(".start-game");
 const cards = document.querySelectorAll(".card");
 const lives = document.querySelector(".hearts");
 
-
 function flipWhenStart() {
-  gameStarted = true
+  gameStarted = true;
   cards.forEach((card) => card.classList.add("flip"));
 
-  gameStatus.innerHTML =
-    "<h4><strong>You have 15 seconds to memorize the cards.</strong></h4>";
+  setTimeOut("You have 15 seconds to memorize the cards", 0);
+
+  setTimeOut("Here you go!", 5000);
 
   setTimeout(() => {
-    gameStatus.innerHTML = "<h4><strong>Here you go!</strong></h4>";
     cards.forEach((card) => card.classList.remove("flip"));
-  }, 1000); //change to 15secs
+  }, 5000); //change to 15secs
 
   if (gameStarted) {
     cards.forEach((card) => card.addEventListener("click", flipCard));
-  };
-  
+  }
 }
 
 function flipCard() {
@@ -68,15 +66,14 @@ function unFlipCards() {
 
     gameStatus.innerHTML = "<h4><strong>Lost a life!</strong></h4>";
 
-    loseALife(); 
-    
-    if(lives.hasChildNodes){
-    setTimeout(() => {
-      gameStatus.innerHTML = "<h4><strong>Proceed...</strong></h4>";
-    }, 1500);} else {
-        gameStatus.innerHTML = "<h4><strong>You lose</strong></h4>"
-    }
+    loseALife();
 
+    if (lives.children.length === 0) {
+      setTimeOut("You lose, click Restart game", 1500);
+      cards.forEach((card) => card.removeEventListener("click", flipCard));
+    } else {
+      setTimeOut("Proceed...", 1500);
+    }
     resetBoard();
   }, 1500);
 }
@@ -95,18 +92,20 @@ function resetBoard() {
   });
 })();
 
-
 function disableStart() {
-    startButton.removeEventListener("click", startButton)
- }
-
+  startButton.removeEventListener("click", startButton);
+}
 
 function loseALife() {
   let child = document.querySelector(".life");
   let lostLife = lives.removeChild(child);
 }
 
+function setTimeOut(string, timeout) {
+  setTimeout(() => {
+    gameStatus.innerHTML = `<h4><strong>${string}</strong></h4>`;
+  }, timeout);
+}
+
 startButton.addEventListener("click", flipWhenStart);
-disableStart()
-  
-  
+disableStart();
