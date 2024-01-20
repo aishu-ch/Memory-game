@@ -7,6 +7,8 @@ const startButton = document.querySelector(".button");
 const gameStatus = document.querySelector(".start-game");
 const cards = document.querySelectorAll(".card");
 const lives = document.querySelector(".hearts");
+let matchedCard = document.getElementsByClassName("match")
+
 
 function flipWhenStart() {
   gameStarted = true;
@@ -30,6 +32,7 @@ function flipCard() {
   if (this === firstCard) return;
 
   this.classList.add("flip");
+  this.classList.add("match");
 
   if (!hasFlippedCard) {
     hasFlippedCard = true;
@@ -52,8 +55,16 @@ function checkForMatch() {
 }
 
 function disableCards() {
+    
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
+//   setTimeout(() => {
+//     firstCard.style.visibility = "hidden"
+//     secondCard.style.visibility = "hidden"
+//   }, 1000);
+    if (matchedCard.length == 20) {
+        gameStatus.innerHTML = "<h4><strong>You win! Click Restart to play again.</strong></h4>"
+    }
 
   resetBoard();
 }
@@ -69,7 +80,7 @@ function unFlipCards() {
     loseALife();
 
     if (lives.children.length === 0) {
-      setTimeOut("You lose, click Restart game", 1500);
+      setTimeOut("You lose! Click Restart to play again.", 1500);
       cards.forEach((card) => card.removeEventListener("click", flipCard));
     } else {
       setTimeOut("Proceed...", 1500);
@@ -92,9 +103,6 @@ function resetBoard() {
   });
 })();
 
-function disableStart() {
-  startButton.removeEventListener("click", startButton);
-}
 
 function loseALife() {
   let child = document.querySelector(".life");
@@ -107,5 +115,6 @@ function setTimeOut(string, timeout) {
   }, timeout);
 }
 
+
 startButton.addEventListener("click", flipWhenStart);
-disableStart();
+startButton.removeEventListener("click", startButton)
