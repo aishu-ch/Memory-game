@@ -7,7 +7,8 @@ const startButton = document.querySelector(".button");
 const gameStatus = document.querySelector(".start-game");
 const cards = document.querySelectorAll(".card");
 const lives = document.querySelector(".hearts");
-let matchedCard = document.getElementsByClassName("match")
+const matchedCard = document.getElementsByClassName("match")
+const reStartGame = document.getElementById("restart-game")
 
 
 function flipWhenStart() {
@@ -64,6 +65,7 @@ function disableCards() {
 //   }, 1000);
     if (matchedCard.length == 20) {
         gameStatus.innerHTML = "<h4><strong>You win! Click Restart to play again.</strong></h4>"
+        restartGame()
     }
 
   resetBoard();
@@ -80,10 +82,11 @@ function unFlipCards() {
     loseALife();
 
     if (lives.children.length === 0) {
-      setTimeOut("You lose! Click Restart to play again.", 1500);
+      setTimeOut("You lose! Click Restart to play again.", 1000);
+      restartGame()
       cards.forEach((card) => card.removeEventListener("click", flipCard));
     } else {
-      setTimeOut("Proceed...", 1500);
+      setTimeOut("Proceed...", 1000);
     }
     resetBoard();
   }, 1500);
@@ -115,6 +118,18 @@ function setTimeOut(string, timeout) {
   }, timeout);
 }
 
+function restartGame() {
+    const restart = document.createElement("button")
+    restart.innerHTML = "<strong>Restart</strong>"
+    restart.setAttribute("type", "button")
+    restart.setAttribute("id", "button")
+    restart.setAttribute("class", "btn btn-warning start button")
+    restart.setAttribute("onClick", "window.location.reload()")
+    reStartGame.appendChild(restart)
+    // restart.addEventListener("click", window.location.reload())
+}
+
 
 startButton.addEventListener("click", flipWhenStart);
-startButton.removeEventListener("click", startButton)
+startButton.removeEventListener("click", startButton);
+
