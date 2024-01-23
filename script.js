@@ -7,16 +7,16 @@ const startButton = document.querySelector(".button");
 const gameStatus = document.querySelector(".start-game");
 const cards = document.querySelectorAll(".card");
 const lives = document.querySelector(".hearts");
-const matchedCard = document.getElementsByClassName("match")
-const reStartGame = document.getElementById("restart-game")
+const matchedCard = document.getElementsByClassName("match");
+const reStartGame = document.getElementById("restart-game");
 
 
 function flipWhenStart() {
   gameStarted = true;
+
   cards.forEach((card) => card.classList.add("flip"));
 
   setTimeOut("You have 15 seconds to memorize the cards", 0);
-
   setTimeOut("Here you go!", 5000);
 
   setTimeout(() => {
@@ -32,8 +32,7 @@ function flipCard() {
   if (lockBoard) return;
   if (this === firstCard) return;
 
-  this.classList.add("flip");
-  this.classList.add("match");
+  this.classList.add("flip", "match");
 
   if (!hasFlippedCard) {
     hasFlippedCard = true;
@@ -56,38 +55,31 @@ function checkForMatch() {
 }
 
 function disableCards() {
-    
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
-//   setTimeout(() => {
-//     firstCard.style.visibility = "hidden"
-//     secondCard.style.visibility = "hidden"
-//   }, 1000);
-    if (matchedCard.length == 20) {
-        gameStatus.innerHTML = "<h4><strong>You win! Click Restart to play again.</strong></h4>"
-        restartGame()
-    }
+
+  //   setTimeout(() => {
+  //     firstCard.style.visibility = "hidden"
+  //     secondCard.style.visibility = "hidden"
+  //   }, 1000);
+
+  if (matchedCard.length == 20) {
+    gameStatus.innerHTML = "<h4><strong>You win! Click Restart to play again.</strong></h4>";
+    restartGame();
+  }
 
   resetBoard();
 }
 
 function unFlipCards() {
   lockBoard = true;
+
   setTimeout(() => {
     firstCard.classList.remove("flip");
     secondCard.classList.remove("flip");
-
-    gameStatus.innerHTML = "<h4><strong>Lost a life!</strong></h4>";
-
+    
     loseALife();
 
-    if (lives.children.length === 0) {
-      setTimeOut("You lose! Click Restart to play again.", 1000);
-      restartGame()
-      cards.forEach((card) => card.removeEventListener("click", flipCard));
-    } else {
-      setTimeOut("Proceed...", 1000);
-    }
     resetBoard();
   }, 1500);
 }
@@ -106,10 +98,17 @@ function resetBoard() {
   });
 })();
 
-
 function loseALife() {
+  gameStatus.innerHTML = "<h4><strong>Lost a life!</strong></h4>";
   let child = document.querySelector(".life");
-  let lostLife = lives.removeChild(child);
+  lives.removeChild(child);
+  if (lives.children.length === 0) {
+    setTimeOut("You lose! Click Restart to play again.", 1000);
+    restartGame();
+    cards.forEach((card) => card.removeEventListener("click", flipCard));
+  } else {
+    setTimeOut("Proceed...", 1000);
+  }
 }
 
 function setTimeOut(string, timeout) {
@@ -119,17 +118,12 @@ function setTimeOut(string, timeout) {
 }
 
 function restartGame() {
-    const restart = document.createElement("button")
-    restart.innerHTML = "<strong>Restart</strong>"
-    restart.setAttribute("type", "button")
-    restart.setAttribute("id", "button")
-    restart.setAttribute("class", "btn btn-warning start button")
-    restart.setAttribute("onClick", "window.location.reload()")
-    reStartGame.appendChild(restart)
-    // restart.addEventListener("click", window.location.reload())
+  const restart = document.createElement("button");
+  restart.innerHTML = "<strong>Restart</strong>";
+  restart.setAttribute("class", "btn btn-warning start button");
+  restart.setAttribute("onClick", "window.location.reload()");
+  reStartGame.appendChild(restart);
 }
-
 
 startButton.addEventListener("click", flipWhenStart);
 startButton.removeEventListener("click", startButton);
-
