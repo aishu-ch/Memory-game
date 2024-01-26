@@ -14,7 +14,8 @@ Memory Game built using **HTML, CSS and JS**
 
 **START SCREEN OF THE GAME:**
 
-![image](https://github.com/aishu-ch/Memory-game/assets/150415443/a55b48c2-fda3-4540-90b0-995e679f552f)
+![image](https://github.com/aishu-ch/Memory-game/assets/150415443/47b443be-6e28-45ae-9101-1a1d8a67610b)
+
 
 
 
