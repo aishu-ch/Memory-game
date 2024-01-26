@@ -1,1 +1,24 @@
-Memory Game using HTML, CSS and JS
+**FLIP-UP**
+
+Memory Game built using **HTML, CSS and JS**
+
+**HOW TO PLAY:**
+
+- The game starts with all the cards face down and 5 lives.
+- Click "Start game" to show the pictures for 15 seconds before the cards flip back.
+- Click on any card to flip it. Click on another card to flip it as well.
+- If the pictures on the two cards match, they stay open. If not, the cards flip back down and you lose a life.
+- If you match all the cards before losing 5 lives, you win. If not, you lose.
+- You can click "Restart" to play again.
+
+
+**START SCREEN OF THE GAME:**
+
+![image](https://github.com/aishu-ch/Memory-game/assets/150415443/a55b48c2-fda3-4540-90b0-995e679f552f)
+
+
+
+
+
+
+
