@@ -9,20 +9,28 @@ const cards = document.querySelectorAll(".card");
 const lives = document.querySelector(".hearts");
 const matchedCard = document.getElementsByClassName("match");
 const reStartGame = document.getElementById("restart-game");
-// let mySound = new Audio("audio\underwater-ambience-6201.mp3")
-// mySound.play()
+
+const audio = {
+  bgMusic: new Audio("audio/bgMusic.mp3"),
+  flipCards: new Audio("audio/flipCard.mp3"),
+  noMatch: new Audio("audio/noMatch.mp3"),
+  match: new Audio("audio/match.mp3"),
+  playerWin: new Audio("audio/playerWin.mp3"),
+  gameOver: new Audio("audio/gameOver.mp3"),
+};
 
 function flipWhenStart() {
+  audio.bgMusic.play();
   gameStarted = true;
 
   cards.forEach((card) => card.classList.add("flip"));
 
-  setTimeOut("You have 15 seconds to memorize the cards", 0);
-  setTimeOut("Here you go!", 5000);
+  setTimeOut("You have 10 seconds to memorize the cards", 0);
+  setTimeOut("Here you go!", 10000);
 
   setTimeout(() => {
     cards.forEach((card) => card.classList.remove("flip"));
-  }, 10000); 
+  }, 10000);
 
   if (gameStarted) {
     cards.forEach((card) => card.addEventListener("click", flipCard));
@@ -34,7 +42,7 @@ function flipCard() {
   if (this === firstCard) return;
 
   this.classList.add("flip", "match");
-  this.style.visibility = "visible"
+  audio.flipCards.play();
 
   if (!hasFlippedCard) {
     hasFlippedCard = true;
@@ -49,11 +57,11 @@ function flipCard() {
 
 function checkForMatch() {
   if (firstCard.dataset.framework === secondCard.dataset.framework) {
-    
+    audio.match.play();
     setTimeout(() => {
-        disableCards()
+      disableCards();
     }, 500);
-    
+
     return;
   }
 
@@ -64,13 +72,14 @@ function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
 
-    
-      firstCard.style.visibility = "hidden"
-      secondCard.style.visibility = "hidden"
-    
+  firstCard.style.visibility = "hidden";
+  secondCard.style.visibility = "hidden";
 
   if (matchedCard.length == 20) {
-    gameStatus.innerHTML = "<h4><strong>You win! Click Restart to play again.</strong></h4>";
+    audio.bgMusic.pause();
+    audio.playerWin.play();
+    gameStatus.innerHTML =
+      "<h4><strong>You win! Click Restart to play again.</strong></h4>";
     restartGame();
   }
 
@@ -79,11 +88,12 @@ function disableCards() {
 
 function unFlipCards() {
   lockBoard = true;
-
+  audio.noMatch.play();
+  audio.noMatch.volume = 0.5;
   setTimeout(() => {
     firstCard.classList.remove("flip");
     secondCard.classList.remove("flip");
-    
+
     loseALife();
 
     resetBoard();
@@ -109,6 +119,8 @@ function loseALife() {
   let child = document.querySelector(".life");
   lives.removeChild(child);
   if (lives.children.length === 0) {
+    audio.bgMusic.pause();
+    audio.gameOver.play();
     setTimeOut("You lose! Click Restart to play again.", 1000);
     restartGame();
     cards.forEach((card) => card.removeEventListener("click", flipCard));
