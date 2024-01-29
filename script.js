@@ -33,6 +33,7 @@ function flipCard() {
   if (this === firstCard) return;
 
   this.classList.add("flip", "match");
+  this.style.visibility = "visible"
 
   if (!hasFlippedCard) {
     hasFlippedCard = true;
@@ -47,7 +48,11 @@ function flipCard() {
 
 function checkForMatch() {
   if (firstCard.dataset.framework === secondCard.dataset.framework) {
-    disableCards();
+    
+    setTimeout(() => {
+        disableCards()
+    }, 1500);
+    
     return;
   }
 
@@ -58,10 +63,10 @@ function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
 
-  //   setTimeout(() => {
-  //     firstCard.style.visibility = "hidden"
-  //     secondCard.style.visibility = "hidden"
-  //   }, 1000);
+    
+      firstCard.style.visibility = "hidden"
+      secondCard.style.visibility = "hidden"
+    
 
   if (matchedCard.length == 20) {
     gameStatus.innerHTML = "<h4><strong>You win! Click Restart to play again.</strong></h4>";
