@@ -9,7 +9,8 @@ const cards = document.querySelectorAll(".card");
 const lives = document.querySelector(".hearts");
 const matchedCard = document.getElementsByClassName("match");
 const reStartGame = document.getElementById("restart-game");
-
+// let mySound = new Audio("audio\underwater-ambience-6201.mp3")
+// mySound.play()
 
 function flipWhenStart() {
   gameStarted = true;
@@ -21,7 +22,7 @@ function flipWhenStart() {
 
   setTimeout(() => {
     cards.forEach((card) => card.classList.remove("flip"));
-  }, 5000); //change to 15secs
+  }, 10000); 
 
   if (gameStarted) {
     cards.forEach((card) => card.addEventListener("click", flipCard));
@@ -51,7 +52,7 @@ function checkForMatch() {
     
     setTimeout(() => {
         disableCards()
-    }, 1500);
+    }, 500);
     
     return;
   }
