@@ -17,6 +17,13 @@ Memory Game built using **HTML, CSS and JS**
 ![image](https://github.com/aishu-ch/Memory-game/assets/150415443/47b443be-6e28-45ae-9101-1a1d8a67610b)
 
 
+**DEPOLYMENT**
+
+Click the below link to play the game.
+
+https://aishu-ch.github.io/Memory-game/
+
+
 
 
 
