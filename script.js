@@ -1,7 +1,6 @@
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
-let gameStarted = false;
 
 const startButton = document.querySelector(".button");
 const gameStatus = document.querySelector(".start-game");
@@ -16,12 +15,11 @@ const audio = {
   noMatch: new Audio("audio/noMatch.mp3"),
   match: new Audio("audio/match.mp3"),
   playerWin: new Audio("audio/playerWin.mp3"),
-  gameOver: new Audio("audio/gameOver.mp3"),
+  gameOver: new Audio("audio/gameover.mp3"),
 };
 
 function flipWhenStart() {
   audio.bgMusic.play();
-  gameStarted = true;
 
   cards.forEach((card) => card.classList.add("flip"));
 
@@ -29,12 +27,12 @@ function flipWhenStart() {
   setTimeOut("Here you go!", 10000);
 
   setTimeout(() => {
-    cards.forEach((card) => card.classList.remove("flip"));
+    cards.forEach((card) => {
+      card.classList.remove("flip");
+      card.addEventListener("click", flipCard)
+    });
   }, 10000);
 
-  if (gameStarted) {
-    cards.forEach((card) => card.addEventListener("click", flipCard));
-  }
 }
 
 function flipCard() {
@@ -90,6 +88,7 @@ function unFlipCards() {
   lockBoard = true;
   audio.noMatch.play();
   audio.noMatch.volume = 0.5;
+  
   setTimeout(() => {
     firstCard.classList.remove("flip");
     secondCard.classList.remove("flip");
